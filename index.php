@@ -26,6 +26,30 @@
         <div class="container-fluid bg-light">
             <h1>Itt látható az összes felvett játék listája.</h1>
         </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Neve</th>
+                    <th>Modellje</th>
+                    <th>Gyártója</th>
+                    <th>Min ajánlott életkor</th>
+                    <th>típusa</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                <th>#</th>
+                    <th>Neve</th>
+                    <th>Modell</th>
+                    <th>Gyártó</th>
+                    <th>Min ajánlott életkor</th>
+                    <th>típusa</th>
+                </tr>
+            </tfoot>
+        </table>
 
     </main>
     
