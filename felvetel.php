@@ -30,7 +30,7 @@
                 alert("A minimálisan ajánlott életkor megadása kötelező");
                 return false;
             }
-            if (tipus.trim().length == 0) {
+            if (tipus != "tarsas" || tipus != "egyeb") {
                 alert("A típus megadása kötelező");
                 return false;
             }
@@ -77,11 +77,30 @@
             } else if (!in_array($_POST['min_ajanlott_eletkor'], array_keys($min_ajanlott_eletkorok))) {
                 $hiba .= "A minimálisan ajánlott életkort a legördülő menüből válassza ki. ";
             }
-                if (!isset($_POST['tipus']) || empty($_POST['tipus'])) {
+            if (!isset($_POST['tipus']) || empty($_POST['tipus'])) {
                 $hiba .= "A típus mező kitöltése kötelező. ";
             }
-        }
             ?>
+            <?php if ($hiba == ""): ?>
+                <?php
+                $file = fopen("adatok.csv", "a");
+                $sor = implode(";", $_POST) . PHP_EOL;
+                fwrite($file, $sor);
+                ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Sikeres felvétel.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php else: ?>
+                
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $hiba ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+        <?php
+        }
+        ?>
 
         <h1>Itt lehetséges új játék felvétele.</h1> 
         <form action="felvetel.php" method="post" name="jatek_felvetel" onsubmit="return validation();">

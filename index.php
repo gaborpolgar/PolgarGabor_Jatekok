@@ -36,6 +36,29 @@
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    $file = fopen("adatok.csv", "r");
+                    $min_ajanlott_eletkorok = [
+                        'harom' => "3+",
+                        'hat' => "6+",
+                        'nyolc' => "nyolc+"
+                    ];
+                    $i = 0;
+                    ?>
+                    <?php while ($sor = fgets($file)) : ?>
+                        <?php
+                        $i++;
+                        $adatok = explode(';', trim($sor));
+                        ?>
+                        <tr>
+                            <td><?php echo $i ?></td>
+                            <td><?php echo $adatok[0] ?></td>
+                            <td><?php echo $adatok[1] ?></td>
+                            <td><?php echo $adatok[2] ?></td>
+                            <td><?php echo $min_ajanlott_eletkorok[$adatok[3]]; ?></td>
+                            <td><?php echo $adatok[4] ?></td>
+                        </tr>
+                    <?php endwhile; ?>
             </tbody>
             <tfoot>
                 <tr>
