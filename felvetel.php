@@ -7,6 +7,36 @@
     <title>Játékok rögzítése</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script>
+        function validation(){
+            const nev = document.forms['jatek_felvetel']['nev'].value;
+            const modell = document.forms['jatek_felvetel']['modell'].value;
+            const gyarto = document.forms['jatek_felvetel']['gyarto'].value;
+            const min_ajanlott_eletkor = document.forms['jatek_felvetel']['min_ajanlott-eletkor'].value;
+            const tipus = document.forms['jatek_felvetel']['tipus'].value;
+            if (nev.trim().length == 0) {
+                alert("A név megadása kötelező");
+                return false;
+            }
+            if (modell.trim().length == 0) {
+                alert("A modell megadása kötelező");
+                return false;
+            }
+            if (gyarto.trim().length == 0) {
+                alert("A gyártó megadása kötelező");
+                return false;
+            }
+            if (min_ajanlott_eletkor.trim().length == 0) {
+                alert("A minimálisan ajánlott életkor megadása kötelező");
+                return false;
+            }
+            if (tipus.trim().length == 0) {
+                alert("A típus megadása kötelező");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-warning">
@@ -23,11 +53,41 @@
         </div>
     </nav>
     <main class="container">
+        <?php
+        $min_ajanlott_eletkorok = [
+            'harom' => "3+",
+            'hat' => "6+",
+            'nyolc' => "nyolc+"
+        ];
+        ?>
+        <?php
+        if (isset($_POST) && !empty($_POST)) {
+            $hiba = "";
+            if (!isset($_POST['nev']) || empty($_POST['nev'])) {
+                $hiba .= "A név mező kitöltése kötelező. ";
+            }
+            if (!isset($_POST['modell']) || empty($_POST['modell'])) {
+                $hiba .= "A modell mező kitöltése kötelező. ";
+            }
+            if (!isset($_POST['gyarto']) || empty($_POST['gyarto'])) {
+                $hiba .= "A gyártó mező kitöltése kötelező. ";
+            }
+            if (!isset($_POST['min_ajanlott_eletkor']) || empty($_POST['min_ajanlott_eletkor'])) {
+                $hiba .= "A minimálisan ajánlott életkor mező kitöltése kötelező. ";
+            } else if (!in_array($_POST['min_ajanlott_eletkor'], array_keys($min_ajanlott_eletkorok))) {
+                $hiba .= "A minimálisan ajánlott életkort a legördülő menüből válassza ki. ";
+            }
+                if (!isset($_POST['tipus']) || empty($_POST['tipus'])) {
+                $hiba .= "A típus mező kitöltése kötelező. ";
+            }
+        }
+            ?>
+
         <h1>Itt lehetséges új játék felvétele.</h1> 
-        <form action="felvetel.php" method="post" name="jatek_felvetel">
+        <form action="felvetel.php" method="post" name="jatek_felvetel" onsubmit="return validation();">
             <div class="mb-3">
-                <label for="neve_input">Neve</label>
-                <input class="form-control" type="text" id="neve_input" name="neve" placeholder="neve" required>
+                <label for="nev_input">Neve</label>
+                <input class="form-control" type="text" id="nev_input" name="nev" placeholder="név" required>
             </div>
             <div class="mb-3">
                 <label for="modell_input">Modell</label>
@@ -35,23 +95,23 @@
             </div>
             <div class="mb-3">
                 <label for="gyarto_input">Gyártó</label>
-                <input class="form-control" type="text" id="gyarto_input" name="gyarto" placeholder="gyarto" required>
+                <input class="form-control" type="text" id="gyarto_input" name="gyarto" placeholder="gyártó" required>
             </div>
             <div class="mb-3">
-                <label for="min_ajanlott_eletor_input">Minimális Ajánlott életkor</label>
-                <select class="form-select" id="min_ajanlott_eletor_input" name="min_ajanlott_eletor" required>
+                <label for="min_ajanlott_eletkor_input">Minimális Ajánlott életkor</label>
+                <select class="form-select" id="min_ajanlott_eletkor_input" name="min_ajanlott_eletkor" required>
                     <option value=""></option>
-                    <option value="harom">3+</option>
-                    <option value="hat">6+</option>
-                    <option value="nyolc">8+</option>
+                    <?php foreach ($min_ajanlott_eletkorok as $key => $value): ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label radio_label checkbox_label">Típusa:</label>
                 <div>
-                    <input class="form-check-input" type="radio" name="tipus" id="tarsas_input" value="ferfi">
+                    <input class="form-check-input" type="radio" name="tipus" id="tarsas_input" value="tarsas">
                     <label class="form-check-label radio_label" for="tarsas_input">társas</label>
-                    <input class="form-check-input" type="radio" name="tipus" id="egyeb_input" value="no">
+                    <input class="form-check-input" type="radio" name="tipus" id="egyeb_input" value="egyeb">
                     <label class="form-check-label radio_label" for="egyeb_input">egyéb</label> 
                 </div>
             </div>
