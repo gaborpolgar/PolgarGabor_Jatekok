@@ -13,19 +13,53 @@
         <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Játékok listázása</a>
+                        <a class="nav-link" aria-current="page" href="index.php">Játékok listázása</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="felvetel.php">Játék felvétele</a>
+                        <a class="nav-link active" href="felvetel.php">Játék felvétele</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <main class="container-fluid">
-        <div class="container-fluid bg-light">
-           <h1>Itt lehetséges új játék felvétele.</h1> 
-        </div>
+    <main class="container">
+        <h1>Itt lehetséges új játék felvétele.</h1> 
+        <form action="felvetel.php" method="post" name="jatek_felvetel">
+            <div class="mb-3">
+                <label for="neve_input">Neve</label>
+                <input class="form-control" type="text" id="neve_input" name="neve" placeholder="neve" required>
+            </div>
+            <div class="mb-3">
+                <label for="modell_input">Modell</label>
+                <input class="form-control" type="text" id="modell_input" name="modell" placeholder="modell" required>
+            </div>
+            <div class="mb-3">
+                <label for="gyarto_input">Gyártó</label>
+                <input class="form-control" type="text" id="gyarto_input" name="gyarto" placeholder="gyarto" required>
+            </div>
+            <div class="mb-3">
+                <label for="min_ajanlott_eletor_input">Minimális Ajánlott életkor</label>
+                <select class="form-select" id="min_ajanlott_eletor_input" name="min_ajanlott_eletor" required>
+                    <option value=""></option>
+                    <option value="harom">3+</option>
+                    <option value="hat">6+</option>
+                    <option value="nyolc">8+</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label radio_label checkbox_label">Típusa:</label>
+                <div>
+                    <input class="form-check-input" type="radio" name="tipus" id="tarsas_input" value="ferfi">
+                    <label class="form-check-label radio_label" for="tarsas_input">társas</label>
+                    <input class="form-check-input" type="radio" name="tipus" id="egyeb_input" value="no">
+                    <label class="form-check-label radio_label" for="egyeb_input">egyéb</label> 
+                </div>
+            </div>
+            
+
+            <button class="btn btn-outline-secondary" type="submit">Felvétel</button>
+        </form>
+
 
     </main>
     

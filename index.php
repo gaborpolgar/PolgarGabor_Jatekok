@@ -22,10 +22,8 @@
             </div>
         </div>
     </nav>
-    <main class="container-fluid">
-        <div class="container-fluid bg-light">
+    <main class="container">
             <h1>Itt látható az összes felvett játék listája.</h1>
-        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -43,8 +41,8 @@
                 <tr>
                 <th>#</th>
                     <th>Neve</th>
-                    <th>Modell</th>
-                    <th>Gyártó</th>
+                    <th>Modellje</th>
+                    <th>Gyártója</th>
                     <th>Min ajánlott életkor</th>
                     <th>típusa</th>
                 </tr>
