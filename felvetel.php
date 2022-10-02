@@ -128,7 +128,7 @@
             <div class="mb-3">
                 <label class="form-label radio_label checkbox_label">Típusa:</label>
                 <div>
-                    <input class="form-check-input" type="radio" name="tipus" id="tarsas_input" value="tarsas">
+                    <input class="form-check-input" type="radio" name="tipus" id="tarsas_input" value="tarsas" required>
                     <label class="form-check-label radio_label" for="tarsas_input">társas</label>
                     <input class="form-check-input" type="radio" name="tipus" id="egyeb_input" value="egyeb">
                     <label class="form-check-label radio_label" for="egyeb_input">egyéb</label> 
